@@ -1,36 +1,41 @@
-using System;
+using System.ComponentModel;
 
-namespace SensitivityLabelSystem.Core.Models
+namespace LLMSensitiveDataGoverance.Core.Models
 {
     /// <summary>
     /// Defines the priority levels for sensitivity labels.
-    /// Higher priority labels take precedence over lower priority labels.
+    /// Higher values indicate higher sensitivity and take precedence.
     /// </summary>
     public enum LabelPriority
     {
         /// <summary>
-        /// Public information that can be shared freely.
+        /// Public information with no restrictions.
         /// </summary>
+        [Description("Public")]
         Public = 0,
 
         /// <summary>
-        /// Internal information for organization use only.
+        /// Internal information for organization use.
         /// </summary>
+        [Description("Internal")]
         Internal = 1,
 
         /// <summary>
-        /// Confidential information requiring special handling.
+        /// Confidential information with access restrictions.
         /// </summary>
+        [Description("Confidential")]
         Confidential = 2,
 
         /// <summary>
         /// Highly confidential information with strict access controls.
         /// </summary>
+        [Description("Highly Confidential")]
         HighlyConfidential = 3,
 
         /// <summary>
         /// Restricted information with the highest level of protection.
         /// </summary>
+        [Description("Restricted")]
         Restricted = 4
     }
 }
