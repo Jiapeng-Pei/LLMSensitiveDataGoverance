@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace SensitivityLabelSystem.Core.Models
+namespace LLMSensitiveDataGoverance.Core.Models
 {
     /// <summary>
     /// Represents the result of a validation operation.
@@ -11,70 +12,152 @@ namespace SensitivityLabelSystem.Core.Models
         /// <summary>
         /// Gets or sets a value indicating whether the validation was successful.
         /// </summary>
-        public bool IsValid { get; set; }
+        public bool IsValid { get; set; } = true;
 
         /// <summary>
         /// Gets or sets the error message if validation failed.
         /// </summary>
-        public string ErrorMessage { get; set; }
+        public string ErrorMessage { get; set; } = string.Empty;
 
         /// <summary>
-        /// Gets or sets the collection of validation errors.
+        /// Gets or sets the list of validation errors.
         /// </summary>
-        public IList<string> Errors { get; set; }
+        public List<ValidationError> Errors { get; set; } = new List<ValidationError>();
 
         /// <summary>
-        /// Gets or sets additional context information about the validation.
+        /// Gets or sets the list of validation warnings.
         /// </summary>
-        public Dictionary<string, object> Context { get; set; }
+        public List<ValidationWarning> Warnings { get; set; } = new List<ValidationWarning>();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ValidationResult"/> class.
+        /// Gets or sets the timestamp when the validation was performed.
         /// </summary>
-        public ValidationResult()
-        {
-            Errors = new List<string>();
-            Context = new Dictionary<string, object>();
-        }
+        public DateTime ValidatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// Creates a successful validation result.
         /// </summary>
-        /// <returns>A successful validation result.</returns>
         public static ValidationResult Success()
         {
             return new ValidationResult { IsValid = true };
         }
 
         /// <summary>
-        /// Creates a failed validation result with the specified error message.
+        /// Creates a failed validation result with an error message.
         /// </summary>
-        /// <param name="errorMessage">The error message.</param>
-        /// <returns>A failed validation result.</returns>
         public static ValidationResult Failure(string errorMessage)
         {
-            return new ValidationResult 
-            { 
-                IsValid = false, 
+            return new ValidationResult
+            {
+                IsValid = false,
                 ErrorMessage = errorMessage,
-                Errors = new List<string> { errorMessage }
+                Errors = new List<ValidationError> { new ValidationError { Message = errorMessage } }
             };
         }
 
         /// <summary>
-        /// Creates a failed validation result with multiple error messages.
+        /// Creates a failed validation result with multiple errors.
         /// </summary>
-        /// <param name="errors">The collection of error messages.</param>
-        /// <returns>A failed validation result.</returns>
-        public static ValidationResult Failure(IEnumerable<string> errors)
+        public static ValidationResult Failure(IEnumerable<ValidationError> errors)
         {
-            var errorsList = new List<string>(errors);
-            return new ValidationResult 
-            { 
-                IsValid = false, 
-                ErrorMessage = string.Join("; ", errorsList),
-                Errors = errorsList
+            var errorList = errors.ToList();
+            return new ValidationResult
+            {
+                IsValid = false,
+                ErrorMessage = string.Join("; ", errorList.Select(e => e.Message)),
+                Errors = errorList
             };
+        }
+
+        /// <summary>
+        /// Adds an error to the validation result.
+        /// </summary>
+        public void AddError(string message, string? field = null)
+        {
+            Errors.Add(new ValidationError { Message = message, Field = field });
+            IsValid = false;
+            if (string.IsNullOrEmpty(ErrorMessage))
+            {
+                ErrorMessage = message;
+            }
+        }
+
+        /// <summary>
+        /// Adds a warning to the validation result.
+        /// </summary>
+        public void AddWarning(string message, string? field = null)
+        {
+            Warnings.Add(new ValidationWarning { Message = message, Field = field });
+        }
+
+        /// <summary>
+        /// Returns a string representation of the validation result.
+        /// </summary>
+        public override string ToString()
+        {
+            if (IsValid)
+            {
+                return $"Valid ({Warnings.Count} warnings)";
+            }
+            return $"Invalid: {ErrorMessage}";
+        }
+    }
+
+    /// <summary>
+    /// Represents a validation error.
+    /// </summary>
+    public class ValidationError
+    {
+        /// <summary>
+        /// Gets or sets the error message.
+        /// </summary>
+        public string Message { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets the field that caused the error.
+        /// </summary>
+        public string? Field { get; set; }
+
+        /// <summary>
+        /// Gets or sets the error code.
+        /// </summary>
+        public string? Code { get; set; }
+
+        /// <summary>
+        /// Returns a string representation of the validation error.
+        /// </summary>
+        public override string ToString()
+        {
+            return Field != null ? $"{Field}: {Message}" : Message;
+        }
+    }
+
+    /// <summary>
+    /// Represents a validation warning.
+    /// </summary>
+    public class ValidationWarning
+    {
+        /// <summary>
+        /// Gets or sets the warning message.
+        /// </summary>
+        public string Message { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets the field that caused the warning.
+        /// </summary>
+        public string? Field { get; set; }
+
+        /// <summary>
+        /// Gets or sets the warning code.
+        /// </summary>
+        public string? Code { get; set; }
+
+        /// <summary>
+        /// Returns a string representation of the validation warning.
+        /// </summary>
+        public override string ToString()
+        {
+            return Field != null ? $"{Field}: {Message}" : Message;
         }
     }
 }
