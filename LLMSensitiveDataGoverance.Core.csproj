@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>LLMSensitiveDataGoverance.Core</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>LLM Sensitive Data Governance Team</Authors>
+    <Company>Microsoft</Company>
+    <Product>LLM Sensitive Data Governance</Product>
+    <Description>Core library for LLM Sensitive Data Governance system providing sensitivity label models, interfaces, and exceptions.</Description>
+    <Copyright>© Microsoft Corporation. All rights reserved.</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/microsoft/llm-sensitive-data-governance</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/microsoft/llm-sensitive-data-governance</RepositoryUrl>
+    <PackageTags>llm;ai;security;data-governance;sensitivity-labels;microsoft</PackageTags>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+    <PackageReference Include="System.Text.Json" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="LLMSensitiveDataGoverance.Core.Tests" />
+    <InternalsVisibleTo Include="LLMSensitiveDataGoverance.CLI" />
+    <InternalsVisibleTo Include="LLMSensitiveDataGoverance.AgentIntegration" />
+  </ItemGroup>
+
+</Project>
