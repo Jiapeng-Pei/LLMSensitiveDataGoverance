@@ -1,0 +1,109 @@
+{
+  "labels": [
+    {
+      "id": "public",
+      "name": "Public",
+      "description": "Information that can be shared publicly without restrictions",
+      "priority": 0,
+      "protection": {
+        "requireEncryption": false,
+        "preventExtraction": false,
+        "preventCopyPaste": false,
+        "preventGrounding": false,
+        "allowedUsers": [],
+        "allowedGroups": []
+      },
+      "customProperties": {
+        "color": "#28a745",
+        "icon": "unlock",
+        "displayText": "Public"
+      },
+      "isActive": true
+    },
+    {
+      "id": "internal",
+      "name": "Internal",
+      "description": "Information for internal use within the organization",
+      "priority": 1,
+      "protection": {
+        "requireEncryption": false,
+        "preventExtraction": false,
+        "preventCopyPaste": false,
+        "preventGrounding": false,
+        "allowedUsers": [],
+        "allowedGroups": ["employees"]
+      },
+      "customProperties": {
+        "color": "#17a2b8",
+        "icon": "building",
+        "displayText": "Internal Use"
+      },
+      "isActive": true
+    },
+    {
+      "id": "confidential",
+      "name": "Confidential",
+      "description": "Sensitive information requiring protection",
+      "priority": 2,
+      "protection": {
+        "requireEncryption": true,
+        "preventExtraction": true,
+        "preventCopyPaste": false,
+        "preventGrounding": false,
+        "allowedUsers": [],
+        "allowedGroups": ["managers", "authorized-users"]
+      },
+      "customProperties": {
+        "color": "#ffc107",
+        "icon": "shield",
+        "displayText": "Confidential"
+      },
+      "isActive": true
+    },
+    {
+      "id": "highly-confidential",
+      "name": "Highly Confidential",
+      "description": "Highly sensitive information with strict access controls",
+      "priority": 3,
+      "protection": {
+        "requireEncryption": true,
+        "preventExtraction": true,
+        "preventCopyPaste": true,
+        "preventGrounding": true,
+        "allowedUsers": ["admin", "senior-management"],
+        "allowedGroups": ["executives"]
+      },
+      "customProperties": {
+        "color": "#fd7e14",
+        "icon": "exclamation-triangle",
+        "displayText": "Highly Confidential"
+      },
+      "isActive": true
+    },
+    {
+      "id": "restricted",
+      "name": "Restricted",
+      "description": "Top secret information with maximum protection",
+      "priority": 4,
+      "protection": {
+        "requireEncryption": true,
+        "preventExtraction": true,
+        "preventCopyPaste": true,
+        "preventGrounding": true,
+        "allowedUsers": ["system-admin"],
+        "allowedGroups": ["security-clearance"]
+      },
+      "customProperties": {
+        "color": "#dc3545",
+        "icon": "lock",
+        "displayText": "Restricted"
+      },
+      "isActive": true
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2024-01-01T00:00:00Z",
+    "description": "Default sensitivity labels configuration"
+  }
+}
