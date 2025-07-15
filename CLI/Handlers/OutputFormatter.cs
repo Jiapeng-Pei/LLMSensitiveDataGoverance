@@ -498,4 +498,4 @@ public class OutputFormatter
             Console.WriteLine(output);
         }
     }
-}
+}   

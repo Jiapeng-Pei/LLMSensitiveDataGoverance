@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  # LLM Governance Service
+  llm-governance:
+    build:
+      context: ../../
+      dockerfile: Dockerfile
+    container_name: llm-governance-service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5000
+      - LLM_GOVERNANCE_LOG_LEVEL=Information
+      - LLM_GOVERNANCE_REPOSITORY_TYPE=Json
+      - LLM_GOVERNANCE_REPOSITORY_PATH=/app/config/labels.json
+      - LLM_GOVERNANCE_ENCRYPTION_ENABLED=true
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./labels.json:/app/config/labels.json:ro
+      - ./appsettings.json:/app/appsettings.json:ro
+      - governance-logs:/app/logs
+    networks:
+      - governance-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Redis for caching (optional)
+  redis:
+    image: redis:7-alpine
+    container_name: llm-governance-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - governance-network
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Monitoring with Prometheus (optional)
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: llm-governance-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    networks:
+      - governance-network
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+
+volumes:
+  governance-logs:
+  redis-data:
+  prometheus-data:
+
+networks:
+  governance-network:
+    driver: bridge

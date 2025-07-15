@@ -1,0 +1,190 @@
+{
+  "labels": [
+    {
+      "id": "public-001",
+      "name": "Public",
+      "description": "Information that can be freely shared with anyone",
+      "priority": "Public",
+      "protection": {
+        "requireEncryption": false,
+        "preventExtraction": false,
+        "preventCopyPaste": false,
+        "preventGrounding": false,
+        "allowedUsers": [],
+        "allowedGroups": []
+      },
+      "customProperties": {
+        "color": "#28a745",
+        "icon": "public",
+        "department": "All"
+      },
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z",
+      "isActive": true
+    },
+    {
+      "id": "internal-001",
+      "name": "Internal",
+      "description": "Information for internal company use only",
+      "priority": "Internal",
+      "protection": {
+        "requireEncryption": false,
+        "preventExtraction": false,
+        "preventCopyPaste": false,
+        "preventGrounding": false,
+        "allowedUsers": [],
+        "allowedGroups": ["employees"]
+      },
+      "customProperties": {
+        "color": "#17a2b8",
+        "icon": "internal",
+        "department": "All"
+      },
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z",
+      "isActive": true
+    },
+    {
+      "id": "confidential-001",
+      "name": "Confidential",
+      "description": "Sensitive business information requiring protection",
+      "priority": "Confidential",
+      "protection": {
+        "requireEncryption": true,
+        "preventExtraction": true,
+        "preventCopyPaste": true,
+        "preventGrounding": false,
+        "allowedUsers": [],
+        "allowedGroups": ["managers", "senior-staff"]
+      },
+      "customProperties": {
+        "color": "#ffc107",
+        "icon": "confidential",
+        "department": "Management"
+      },
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z",
+      "isActive": true
+    },
+    {
+      "id": "highly-confidential-001",
+      "name": "Highly Confidential",
+      "description": "Highly sensitive information with strict access controls",
+      "priority": "HighlyConfidential",
+      "protection": {
+        "requireEncryption": true,
+        "preventExtraction": true,
+        "preventCopyPaste": true,
+        "preventGrounding": true,
+        "allowedUsers": ["admin", "ceo", "cto"],
+        "allowedGroups": ["executives"]
+      },
+      "customProperties": {
+        "color": "#fd7e14",
+        "icon": "highly-confidential",
+        "department": "Executive"
+      },
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z",
+      "isActive": true
+    },
+    {
+      "id": "restricted-001",
+      "name": "Restricted",
+      "description": "Classified information with the highest level of protection",
+      "priority": "Restricted",
+      "protection": {
+        "requireEncryption": true,
+        "preventExtraction": true,
+        "preventCopyPaste": true,
+        "preventGrounding": true,
+        "allowedUsers": ["security-admin"],
+        "allowedGroups": ["security-team"]
+      },
+      "customProperties": {
+        "color": "#dc3545",
+        "icon": "restricted",
+        "department": "Security"
+      },
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z",
+      "isActive": true
+    },
+    {
+      "id": "hr-sensitive-001",
+      "name": "HR Sensitive",
+      "description": "Human resources sensitive information",
+      "priority": "Confidential",
+      "protection": {
+        "requireEncryption": true,
+        "preventExtraction": true,
+        "preventCopyPaste": true,
+        "preventGrounding": false,
+        "allowedUsers": [],
+        "allowedGroups": ["hr-team", "managers"]
+      },
+      "customProperties": {
+        "color": "#6f42c1",
+        "icon": "hr-sensitive",
+        "department": "HR",
+        "dataTypes": ["employee-data", "performance-reviews", "salary-info"]
+      },
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z",
+      "isActive": true
+    },
+    {
+      "id": "financial-001",
+      "name": "Financial",
+      "description": "Financial data and business intelligence",
+      "priority": "Confidential",
+      "protection": {
+        "requireEncryption": true,
+        "preventExtraction": true,
+        "preventCopyPaste": true,
+        "preventGrounding": false,
+        "allowedUsers": [],
+        "allowedGroups": ["finance-team", "executives"]
+      },
+      "customProperties": {
+        "color": "#20c997",
+        "icon": "financial",
+        "department": "Finance",
+        "dataTypes": ["revenue", "expenses", "projections", "budgets"]
+      },
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z",
+      "isActive": true
+    },
+    {
+      "id": "customer-data-001",
+      "name": "Customer Data",
+      "description": "Customer personal information and privacy-sensitive data",
+      "priority": "HighlyConfidential",
+      "protection": {
+        "requireEncryption": true,
+        "preventExtraction": true,
+        "preventCopyPaste": true,
+        "preventGrounding": true,
+        "allowedUsers": [],
+        "allowedGroups": ["customer-service", "data-protection-team"]
+      },
+      "customProperties": {
+        "color": "#e83e8c",
+        "icon": "customer-data",
+        "department": "Customer Service",
+        "dataTypes": ["pii", "contact-info", "purchase-history"],
+        "complianceRequirements": ["GDPR", "CCPA"]
+      },
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z",
+      "isActive": true
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "lastUpdated": "2024-01-01T00:00:00Z",
+    "schema": "https://schemas.anthropic.com/llm-governance/labels/v1",
+    "totalLabels": 8
+  }
+}
