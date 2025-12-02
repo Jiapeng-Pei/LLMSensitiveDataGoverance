@@ -4,7 +4,7 @@ using LLMSensitiveDataGoverance.AgentIntegration;
 using LLMSensitiveDataGoverance.AgentIntegration.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Options; 
 
 namespace LLMSensitiveDataGoverance.Examples.AgentIntegration;
 
