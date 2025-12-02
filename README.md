@@ -10,7 +10,7 @@ A C# system for managing sensitivity labels for LLM grounding data, designed to 
 - **Grounding data protection** based on sensitivity levels
 - **Configurable label hierarchy** (Public → Internal → Confidential → Highly Confidential → Restricted)
 - **Local standalone operation** with no network dependencies
-- **Agent integration** for seamless AI development workflow
+- **Agent integration** for seamless AI development workflow 
 
 ## Quick Start
 
