@@ -4,7 +4,7 @@ A C# system for managing sensitivity labels for LLM grounding data, designed to 
 
 ## Features
 
-- **Microsoft-compliant sensitivity labels** with encryption and access controls
+- **Privacy-compliant sensitivity labels** with encryption and access controls
 - **Visual label indicators** in AI responses
 - **Copy/paste protection** with label preservation
 - **Grounding data protection** based on sensitivity levels
